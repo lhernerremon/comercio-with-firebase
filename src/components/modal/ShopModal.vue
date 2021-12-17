@@ -8,7 +8,7 @@
   >
     <template #activator="{ on, attrs }">
       <div class="is-shop-container" v-bind="attrs" v-on="on">
-        <v-icon :color="allWhite ? '#FFF' : 'primary'">
+        <v-icon color="primary">
           mdi-cart-outline
         </v-icon>
         <div :class="{ 'is-shop': isShop }" />
@@ -44,7 +44,6 @@
             :width="326"
             :mobile-width="335"
             class="shop__button my-4"
-            nuxt
             @click="goTo('/shop/')"
           >
             Finalizar compra
@@ -163,7 +162,7 @@ export default {
   top: 3px;
   right: 3px;
   width: 34px;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #006E43;
 }
 
 .content {

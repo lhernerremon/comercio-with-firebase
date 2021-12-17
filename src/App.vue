@@ -4,7 +4,7 @@
     <v-fade-transition>
       <router-view />
     </v-fade-transition>
-    <comercio-footer />
+    <comercio-footer class="mt-16" />
   </v-app>
 </template>
 

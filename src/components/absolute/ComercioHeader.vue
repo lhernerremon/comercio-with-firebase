@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="d-flex align-center flex-column mt-10">
     <div class="header">
       <router-link
         v-for="item in menuItems"
@@ -12,16 +12,17 @@
       <v-badge
         class="cart-badge"
         color="primary"
+        :content="servicesInCar.toString()"
       >
-        <shop-modal :all-white="allWhite" :is-shop="isPageShop" />
+        <shop-modal :is-shop="isPageShop" />
       </v-badge>
     </div>
-    <p>Logo aquí</p>
+    <v-img src="@/assets/lgo.png" max-width="200" />
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import ShopModal from '@/components/modal/ShopModal'
 
 export default {
@@ -47,21 +48,21 @@ export default {
     return {
       menuItems: [
         { title: 'Inicio', link: '/' },
-        { title: 'Tienda', link: '/tienda' },
-        { title: 'Quiénes somos', link: '/about' },
-        { title: 'Contacto', secondary: true, link: '/contact' }
+        { title: 'Tienda', link: '/store' },
+        { title: '¿Quiénes somos?', link: '/about' },
+        { title: 'Contacto', link: '/contact' }
       ],
       shopdrawer: false
     }
   },
   computed: {
-    // ...mapState('shop', ['shoppingCar']),
+    ...mapState('shop', ['shoppingCar']),
     isPageShop () {
-      return this.$route.name === 'Shop'
+      return this.$route.name === 'Store'
+    },
+    servicesInCar () {
+      return this.shoppingCar.length
     }
-    // servicesInCar () {
-    //   return this.shoppingCar.length
-    // }
   }
 }
 </script>
@@ -118,12 +119,7 @@ a {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  left: 0;
-  right: 15%;
   top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
   width: 807px;
 
   &__title {
