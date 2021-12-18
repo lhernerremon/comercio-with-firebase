@@ -17,7 +17,7 @@
       </v-img>
     </div>
     <div class="text-center minicard__titulo pl-1 pr-1">
-      <router-link :to="`/productos/asd/`" class="text-uppercase">
+      <router-link :to="`/product/asd/`" class="text-uppercase">
         producto.nombreCorto
       </router-link>
     </div>

@@ -44,11 +44,11 @@
             :width="326"
             :mobile-width="335"
             class="shop__button my-4"
-            @click="goTo('/shop/')"
+            @click="goTo('/cart/')"
           >
             Finalizar compra
           </alilab-button>
-          <a class="shop__skip" @click="goTo('/servicios/')">Seguir comprando</a>
+          <a class="shop__skip" @click="goTo('/store/')">Seguir comprando</a>
         </div>
       </v-card-text>
     </v-card>

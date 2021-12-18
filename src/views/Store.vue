@@ -30,7 +30,7 @@
     <div class="text-center mt-5">
       <v-pagination
         v-model="page"
-        :length="3"
+        :length="50"
         :total-visible="5"
         :disabled="disablePagination"
       />
