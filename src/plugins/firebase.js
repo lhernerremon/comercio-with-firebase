@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
+import { getFirestore, collection, getDocs, doc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCBobBI6_TOHVplwdcTyV45F1DjVvAA0mI',
@@ -26,3 +26,5 @@ export async function getProducts () {
   })
   return productsList
 }
+
+export const newContactRef = doc(collection(db, 'contacts'))

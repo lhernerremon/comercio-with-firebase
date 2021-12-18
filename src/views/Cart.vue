@@ -22,14 +22,21 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in 3"
-              :key="item.name"
+              v-for="item in shoppingCar"
+              :key="item.id"
             >
               <td class="text-left">
-                Aretes
+                {{ item.name }}&nbsp;x{{ item.amount }}
               </td>
               <td class="text-right">
-                S/ 120
+                <div>
+                  <span v-if="item.discount">
+                    S/. {{ item.discount }}
+                  </span>
+                  <span v-else>
+                    PS/. {{ item.price }}
+                  </span>
+                </div>
               </td>
             </tr>
             <tr>
@@ -37,7 +44,7 @@
                 <strong>Total</strong>
               </td>
               <td class="text-right">
-                <strong>S/ 150</strong>
+                <strong>S/ {{ subTotal }}</strong>
               </td>
             </tr>
           </tbody>
@@ -93,6 +100,7 @@
 <script>
 import FormFact from '@/components/forms/FormFact'
 import AlilabButton from '@/components/buttons/AlilabButton'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -102,6 +110,15 @@ export default {
   data () {
     return {
       tarjeta: {}
+    }
+  },
+  computed: {
+    ...mapState('shop', ['shoppingCar']),
+    subTotal () {
+      return this.shoppingCar.reduce((partialSum, item) => {
+        const price = item.discount ? item.discount : item.price
+        return partialSum + price * item.amount
+      }, 0)
     }
   }
 }

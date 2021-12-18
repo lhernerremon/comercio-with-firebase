@@ -65,7 +65,11 @@ export default {
   },
   computed: {
     cPicture () {
-      return this.producto.image ? this.producto.image : require('@/assets/producto/nodisponible.jpg')
+      if (this.producto.images) {
+        return this.producto.images[0]
+      } else {
+        return require('@/assets/producto/nodisponible.jpg')
+      }
     }
   },
   methods: {
