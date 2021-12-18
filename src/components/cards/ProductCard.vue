@@ -17,12 +17,12 @@
       </v-img>
     </div>
     <div class="text-center minicard__titulo pl-1 pr-1">
-      <router-link :to="`/product/asd/`" class="text-uppercase">
-        producto.nombreCorto
+      <router-link :to="`/product/${producto.slug}/`" class="text-uppercase">
+        {{ producto.name }}
       </router-link>
     </div>
     <div class="text-center">
-      <alilab-button :width="180" :height="35">
+      <alilab-button :width="180" :height="35" @click="addToCart(producto)">
         Agregar al carrito
       </alilab-button>
     </div>
@@ -31,13 +31,13 @@
         <v-icon size="19" color="primary">
           mdi-plus-box
         </v-icon>
-        Stock: <span class="font-weight-bold mygreen">1</span>
+        Stock: <span class="font-weight-bold mygreen" v-text="producto.stock" />
       </div>
       <div class="minicard__precio text-body-1 d-flex justify-center align-center">
-        S/ 100
+        S/ {{ producto.discount }}
       </div>
       <div class="minicard__precio-anterior text-caption text-decoration-line-through text-center">
-        S/ 150
+        S/ {{ producto.price }}
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@
 
 <script>
 import AlilabButton from '@/components/buttons/AlilabButton'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ProductCard',
@@ -64,10 +65,14 @@ export default {
   },
   computed: {
     cPicture () {
-      return require('@/assets/producto/nodisponible.jpg')
+      return this.producto.image ? this.producto.image : require('@/assets/producto/nodisponible.jpg')
     }
   },
   methods: {
+    ...mapActions('shop', ['addItemToShoppingCar']),
+    addToCart (product) {
+      this.addItemToShoppingCar(product)
+    },
     onImgError (event) {
       this.failed_image = true
     }

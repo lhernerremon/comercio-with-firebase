@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // modules
 import { shop } from '@/store/modules/shop'
+import { firebase } from '@/store/modules/firebase'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,10 @@ export default new Vuex.Store({
   modules: {
     shop: {
       ...shop,
+      namespaced: true
+    },
+    firebase: {
+      ...firebase,
       namespaced: true
     }
   }

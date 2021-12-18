@@ -11,8 +11,12 @@
           {{ service.name }}
         </div>
         <div class="service__price my-2">
-          Precio por {{ service.priceType }}: S/. {{ service.price }}
-          {{ service.additionalText ? `(${service.additionalText})` : '' }}
+          <div v-if="service.discount">
+            Precio por : S/. {{ service.discount }}
+          </div>
+          <div v-else>
+            Precio por : S/. {{ service.price }}
+          </div>
         </div>
         <div class="service__buttons d-flex align-center justify-space-between">
           <v-btn small icon @click="reduceServiceAmount(service)">

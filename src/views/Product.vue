@@ -1,18 +1,12 @@
 <template>
   <div class="mycontainer">
-    <!-- Inicio BreadCrumbs -->
-    <div class="mybreadcrumbs">
-      <span class="text--disabled myupper">producto.nombreCorto</span>
-    </div>
     <!-- Fin BreadCrumbs -->
     <v-row>
       <v-col cols="12" md="6" class="pl-5">
-        <div class="mt-5 titulo-txt myupper">
-          producto.nombre
-        </div>
+        <div class="mt-5 titulo-txt myupper" v-text="producto.name" />
         <div class="d-flex mt-5">
           <div>
-            <v-img max-width="120" contain src="@/assets/logo.png">
+            <v-img max-width="120" contain :src="producto.marcaUrl">
               <template #placeholder>
                 <v-row
                   class="fill-height ma-0"
@@ -28,31 +22,44 @@
             </v-img>
           </div>
           <div class="ml-5 d-flex flex-column justify-center">
-            <div>Stock: <span class="font-weight-bold mygreen">producto.textoStock</span></div>
+            <div>Marca: <span class="font-weight-bold mygreen" v-text="producto.marcaName" /></div>
+            <div>Stock: <span class="font-weight-bold mygreen" v-text="producto.stock" /></div>
           </div>
         </div>
+        <div class="mt-6">
+          <span><strong>Descripción:</strong></span><br>
+          <div style="max-width: 650px;" class="text-justify" v-text="producto.description" />
+        </div>
         <div class="mt-10">
-          <div class="precio-txt mt-10">
-            S/ 123
+          <!-- Price -->
+          <div v-if="producto.discount">
+            <div class="precio-txt mt-10">
+              S/ {{ producto.discount }}
+            </div>
+            <div class="text-caption text-decoration-line-through mygrey">
+              S/ {{ producto.price }}
+            </div>
           </div>
-          <div v-if="producto.oferta" class="text-caption text-decoration-line-through mygrey">
-            S/123
+          <div v-else>
+            <div class="precio-txt mt-10">
+              S/ {{ producto.price }}
+            </div>
           </div>
           <div class="texto-igv">
             Precio incluye IGV
           </div>
         </div>
         <div class=" d-flex justify-center">
-          <v-btn color="green" large dark class=" my-10 btn-consulta" elevation="20">
+          <v-btn color="green" large dark class=" my-10 btn-consulta" elevation="20" @click="addToCart(producto)">
             <v-icon class="mr-2" size="30">
-              mdi-whatsapp
+              mdi-cart-variant
             </v-icon>
             <span>Agregar al carrito</span>
           </v-btn>
         </div>
       </v-col>
       <v-col cols="12" md="6">
-        <detail-product-card />
+        <detail-product-card :imagenes="producto.images" />
       </v-col>
     </v-row>
   </div>
@@ -60,6 +67,7 @@
 
 <script>
 import DetailProductCard from '@/components/cards/DetailProductCard'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -72,10 +80,10 @@ export default {
       600: {
         visibleSlides: 2
       }
-    },
-    rr: ''
+    }
   }),
   computed: {
+    ...mapGetters('firebase', ['getProduct']),
     cellphonecompany () {
       return 'asdasd'
     },
@@ -87,6 +95,16 @@ export default {
     },
     route () {
       return this.$route
+    }
+  },
+  created () {
+    const slug = this.$route.params.slug
+    this.producto = this.getProduct(slug)
+  },
+  methods: {
+    ...mapActions('shop', ['addItemToShoppingCar']),
+    addToCart (product) {
+      this.addItemToShoppingCar(product)
     }
   }
 }

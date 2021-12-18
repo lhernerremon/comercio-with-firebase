@@ -96,7 +96,10 @@ export default {
       }
     },
     subTotal () {
-      return this.shoppingCar.reduce((partialSum, item) => partialSum + item.price * item.amount, 0)
+      return this.shoppingCar.reduce((partialSum, item) => {
+        const price = item.discount ? item.discount : item.price
+        return partialSum + price * item.amount
+      }, 0)
     }
   },
   methods: {
