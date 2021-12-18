@@ -138,7 +138,7 @@ export default {
   }
 
   &__title span {
-    color: #006E43;
+    color: #61ce70;
     font-weight: 800;
     font-size: 24px;
     line-height: 50px;
@@ -162,7 +162,7 @@ export default {
   top: 3px;
   right: 3px;
   width: 34px;
-  border-bottom: 3px solid #006E43;
+  border-bottom: 3px solid #61ce70;
 }
 
 .content {
@@ -186,7 +186,7 @@ export default {
   }
 
   &__price {
-    color: #006E43;
+    color: #61ce70;
     font-weight: bold;
     font-size: 14px;
     line-height: 25px;
@@ -199,7 +199,7 @@ export default {
   }
 
   &__skip {
-    color: #006E43;
+    color: #61ce70;
     font-weight: 600;
     font-size: 16px;
     line-height: 50px;

@@ -34,7 +34,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#006E43'
+      default: '#61ce70'
     },
     disabled: {
       type: Boolean,

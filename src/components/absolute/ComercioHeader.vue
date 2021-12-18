@@ -1,20 +1,36 @@
 <template>
   <div class="d-flex align-center flex-column mt-10">
     <div class="header">
-      <router-link
-        v-for="item in menuItems"
-        :key="item.title"
-        class="header__secondary-title"
-        :to="item.link"
-      >
-        {{ item.title }}
-      </router-link>
+      <div>
+        <router-link class="header__secondary-title" to="/">
+          Inicio
+        </router-link>
+        <div :class="{ 'is-home': isPageHome }" />
+      </div>
+      <div>
+        <router-link class="header__secondary-title" to="/store">
+          Tienda
+        </router-link>
+        <div :class="{ 'is-store': isPageStore }" />
+      </div>
+      <div>
+        <router-link class="header__secondary-title" to="/about">
+          ¿Quiénes somos?
+        </router-link>
+        <div :class="{ 'is-about': isPageAbout }" />
+      </div>
+      <div>
+        <router-link class="header__secondary-title" to="/contact">
+          Contacto
+        </router-link>
+        <div :class="{ 'is-contact': isPageContact }" />
+      </div>
       <v-badge
         class="cart-badge"
         color="primary"
         :content="servicesInCar.toString()"
       >
-        <shop-modal :is-shop="isPageShop" />
+        <shop-modal :is-shop="isPageStore" />
       </v-badge>
     </div>
     <v-img src="@/assets/lgo.png" max-width="200" />
@@ -46,19 +62,22 @@ export default {
   },
   data () {
     return {
-      menuItems: [
-        { title: 'Inicio', link: '/' },
-        { title: 'Tienda', link: '/store' },
-        { title: '¿Quiénes somos?', link: '/about' },
-        { title: 'Contacto', link: '/contact' }
-      ],
       shopdrawer: false
     }
   },
   computed: {
     ...mapState('shop', ['shoppingCar']),
-    isPageShop () {
+    isPageHome () {
+      return this.$route.name === 'Home'
+    },
+    isPageStore () {
       return this.$route.name === 'Store'
+    },
+    isPageAbout () {
+      return this.$route.name === 'About'
+    },
+    isPageContact () {
+      return this.$route.name === 'Contact'
     },
     servicesInCar () {
       return this.shoppingCar.length
@@ -97,7 +116,7 @@ a {
     }
 }
 .green---text {
-  color: #006E43;
+  color: #61ce70;
 }
 .main-container {
   width: 100%;
@@ -129,8 +148,8 @@ a {
   }
 
   &__secondary-title {
-    color: #006E43;
-    @include magic-border(3px, #006E43, 0.3s, 0);
+    color: #61ce70;
+    @include magic-border(3px, #61ce70, 0.3s, 0);
   }
 
   .nuxt-link-active {
@@ -141,6 +160,35 @@ a {
       transition-delay: 0.6s;
     }
   }
+}
+
+.is-home {
+  position: relative;
+  top: -3px;
+  right: 3px;
+  width: 45px;
+  border-bottom: 3px solid #61ce70;
+}
+.is-store {
+  position: relative;
+  top: -3px;
+  right: 3px;
+  width: 57px;
+  border-bottom: 3px solid #61ce70;
+}
+.is-about {
+  position: relative;
+  top: -3px;
+  right: 3px;
+  width: 133px;
+  border-bottom: 3px solid #61ce70;
+}
+.is-contact {
+  position: relative;
+  top: -3px;
+  right: 3px;
+  width: 72px;
+  border-bottom: 3px solid #61ce70;
 }
 
 .logo {

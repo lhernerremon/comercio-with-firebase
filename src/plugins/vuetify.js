@@ -19,7 +19,7 @@ export default new Vuetify({
         success: colors.green.accent3
       },
       light: {
-        primary: '#006E43'
+        primary: '#61ce70'
       }
     }
   },

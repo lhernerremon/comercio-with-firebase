@@ -94,7 +94,7 @@ export default {
   }
 
   &__price {
-    color: #006E43;
+    color: #61ce70;
     font-weight: 600;
     font-size: 14px;
     line-height: 25px;
@@ -110,7 +110,7 @@ export default {
 }
 
 .btn-color {
-  color: #006E43;
+  color: #61ce70;
   font-weight: 600;
   font-size: 24px;
 }
