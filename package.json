@@ -12,6 +12,7 @@
     "firebase": "^9.6.1",
     "vue": "^2.6.11",
     "vue-inner-image-zoom": "^1.1.0",
+    "vue-paycard": "^0.7.0",
     "vue-router": "^3.2.0",
     "vueperslides": "^2.15.2",
     "vuetify": "^2.4.0",

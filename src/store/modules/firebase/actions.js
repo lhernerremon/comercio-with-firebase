@@ -1,5 +1,5 @@
-import { getProducts, newContactRef } from '@/plugins/firebase'
-import { setDoc, Timestamp } from 'firebase/firestore'
+import { getProducts, db } from '@/plugins/firebase'
+import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
 export default {
   fetchProducts: async ({ state, commit }) => {
@@ -9,6 +9,11 @@ export default {
   setContact: async ({ commit }, payload) => {
     const data = payload
     data.date = Timestamp.fromDate(new Date())
-    await setDoc(newContactRef, data)
+    await addDoc(collection(db, 'contacts'), data)
+  },
+  setPedido: async ({ commit }, payload) => {
+    const data = payload
+    data.date = Timestamp.fromDate(new Date())
+    await addDoc(collection(db, 'pedidos'), data)
   }
 }

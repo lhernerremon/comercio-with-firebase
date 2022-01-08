@@ -5,6 +5,9 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import '@/assets/scss/global.scss'
 
+// plugins
+import './plugins/paycard'
+
 Vue.config.productionTip = false
 
 new Vue({
